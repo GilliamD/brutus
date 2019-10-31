@@ -1,0 +1,57 @@
+import java.util.*;
+class Main {
+ public static void main(String[] args) {
+   //Captures the amount of numbers to choose from, known as "n"
+   Scanner object = new Scanner(System.in);
+   System.out.print("Enter a digit: ");
+   Integer n = object.nextInt();
+
+   //Checks to make sure n is positive
+   while (n<=0) {
+     System.out.print("Enter a positive integer for n: ");
+     n = object.nextInt();
+   }
+
+   //Declares the first low and high variables in the divide and conquer algorithm, and welcomes the User
+   System.out.println("Welcome to Guess My Number!");
+   System.out.println("Please think of a number between 0 and " + (n-1) + ".");
+   int low = 0;
+   int high = (n-1);
+
+   //Starts the divide and conquer algorithm
+   String result = object.nextLine();
+   while (!(result.equals("C"))) {
+    int guess = ((low + high)/2);
+
+    //checks to see if my guess is odd then adds one if my guess is odd
+    if(!((low + high) % 2 == 0)){
+     guess++;
+    }
+
+    //Gives the User instructions
+    System.out.println("Is your number: " + guess + "?");
+    System.out.println("Please enter C for correct, H for too high, or L for too low.");
+    System.out.print("Enter your response (H/L/C): ");
+    result = object.nextLine();
+
+   //checks to make sure the user only uses (H/L/C)
+   while(!(result.equals("H")) && !(result.equals("L")) && !(result.equals("C"))){
+      System.out.print("Enter your response (H/L/C): ");
+      result = object.nextLine();
+   }
+
+     //Completes the divide and conquer algorithm
+     if (result.equals("H")) {
+      guess = guess-1;
+      high = guess;
+      guess = ((low+ high)/2);
+    } else if (result.equals("L")) {
+       guess = guess+1;
+       low = guess;
+       guess = ((low+ high)/2);
+    }  else if (result.equals("C")) {
+        System.out.println("Thank you for playing Guess My Number! ");
+    }
+  }
+ }
+}
